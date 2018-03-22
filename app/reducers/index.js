@@ -2,7 +2,7 @@ import { createStore } from 'react';
 
 import { CREATE_DECK } from '../actions';
 
-function deckReducer(state = [], action) {
+function reducer(state = [], action) {
   switch (action.type) {
     case CREATE_DECK:
       return [...state, action.deck];
@@ -11,4 +11,4 @@ function deckReducer(state = [], action) {
   }
 }
 
-export default deckReducer;
+export default reducer;
