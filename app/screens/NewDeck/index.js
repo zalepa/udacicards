@@ -9,6 +9,10 @@ class NewDeck extends React.Component {
     title: ''
   }
 
+  componentDidMount = () => {
+    this.setState({title: ''});
+  }
+
   handleTitleChange = (title) => {
     this.setState({title})
   }
@@ -19,6 +23,8 @@ class NewDeck extends React.Component {
       cards: []
     }
     this.props.dispatch(createDeck(deck));
+    this.setState({ title: '' });
+    this.props.navigation.navigate('Home');
   }
 
   render() {
