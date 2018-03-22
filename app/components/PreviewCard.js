@@ -1,16 +1,18 @@
 import React from 'react';
-import {StyleSheet, View, Text } from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
-const PreviewCard = ({title, size}) => {
+const PreviewCard = ({title, size, onPress}) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.card}>
       <Text style={styles.header}>
         <MaterialCommunityIcons style={styles.icon} name='cards-variant' size={25}/>
         <Text>{title}</Text>
       </Text>
       <Text style={styles.size}>{size} cards</Text>
     </View>
+    </TouchableOpacity>
   )
 }
 

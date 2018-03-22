@@ -11,12 +11,15 @@ export default class Decks extends React.Component {
     {key: 2, title: 'New List 2', size: 100},
   ]
 
+  onSelectPreviewCard = () => {
+    this.props.navigation.navigate('Deck');
+  }
+
   render() {
     return (<View style={styles.container}>
-      <Text style={styles.header}>My Decks</Text>
       <FlatList
         data={this.data}
-        renderItem={({item}) => <PreviewCard {...item} />}
+        renderItem={({item}) => <PreviewCard {...item} onPress={this.onSelectPreviewCard} />}
       />
     </View>)
   }
