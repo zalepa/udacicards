@@ -2,15 +2,15 @@ import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
-const PreviewCard = ({title, size, onPress}) => {
+const PreviewCard = ({deck, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
       <Text style={styles.header}>
         <MaterialCommunityIcons style={styles.icon} name='cards-variant' size={25}/>
-        <Text>{title}</Text>
+        <Text>{deck.title}</Text>
       </Text>
-      <Text style={styles.size}>{size} cards</Text>
+      <Text style={styles.size}>{deck.cards.length} cards</Text>
     </View>
     </TouchableOpacity>
   )

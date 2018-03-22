@@ -6,15 +6,19 @@ import { connect } from 'react-redux';
 class NewDeck extends React.Component {
 
   state = {
-    text: ''
+    title: ''
   }
 
-  handleTitleChange = (text) => {
-    this.setState({text})
+  handleTitleChange = (title) => {
+    this.setState({title})
   }
 
   onCreateNewDeck = () => {
-    this.props.dispatch(createDeck(this.state));
+    const deck = {
+      title: this.state.title,
+      cards: []
+    }
+    this.props.dispatch(createDeck(deck));
   }
 
   render() {
@@ -23,7 +27,7 @@ class NewDeck extends React.Component {
       <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         onChangeText={this.handleTitleChange}
-        value={this.state.text}
+        value={this.state.title}
       />
       <Button
         onPress={this.onCreateNewDeck}
