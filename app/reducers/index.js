@@ -5,7 +5,7 @@ import { CREATE_DECK } from '../actions';
 function reducer(state = [], action) {
   switch (action.type) {
     case CREATE_DECK:
-      console.log([...state, action.deck])
+      action.deck.key = state.length + 1;
       return [...state, action.deck];
     default:
       return state;
