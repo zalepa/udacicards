@@ -12,10 +12,10 @@ class Decks extends React.Component {
 
   render() {
     return (<View style={styles.container}>
-      <FlatList
-        data={this.props.decks}
-        renderItem={({item}) => <PreviewCard deck={item} onPress={this.onSelectPreviewCard} />}
-      />
+
+      {this.props.decks.length > 0
+        ? (<FlatList data={this.props.decks} renderItem={({item}) => <PreviewCard deck={item} onPress={this.onSelectPreviewCard} />} />)
+        : (<Text>No decks yet!</Text>)}
     </View>)
   }
 }
