@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 
 class Decks extends React.Component {
 
-  onSelectPreviewCard = () => {
-    this.props.navigation.navigate('Deck');
+  onSelectPreviewCard = (deck) => {
+    this.props.navigation.navigate('Deck', { deck });
   }
 
   render() {

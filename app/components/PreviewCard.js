@@ -4,7 +4,7 @@ import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 const PreviewCard = ({deck, onPress}) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={() => onPress(deck)}>
       <View style={styles.card}>
       <Text style={styles.header}>
         <MaterialCommunityIcons style={styles.icon} name='cards-variant' size={25}/>
