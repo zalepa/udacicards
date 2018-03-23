@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 class Deck extends React.Component {
 
   addCard = () => {
-    this.props.navigator.navigate('AddCard', { deck: this.props.deck });
+    this.props.navigation.navigate('AddCard', { deck: this.props.deck });
   }
   startQuiz = () => {
-    this.props.navigator.navigate('StartQuiz', { deck: this.props.deck });
+    this.props.navigation.navigate('StartQuiz', { deck: this.props.deck });
   }
 
   render() {
