@@ -25,7 +25,7 @@ class AddCard extends React.Component {
   }
 
   addCard = () => {
-    console.log(this.props);
+
     if (!this.state.question || !this.state.answer) return;
 
     this.props.addCard(this.props.deck.key, this.state);
@@ -43,9 +43,6 @@ class AddCard extends React.Component {
 
   render() {
     return (<View>
-
-      <Text>Current: {this.props.cards.length} cards</Text>
-
       <TextInput
         style={styles.formInput}
         onChangeText={this.handleQuestionChange}
