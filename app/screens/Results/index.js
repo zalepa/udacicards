@@ -1,5 +1,13 @@
 import React from 'react';
-import { Text, View} from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  results: {
+    fontSize: 40,
+    textAlign: 'center',
+    margin: 15
+  }
+})
 
 export default class Results extends React.Component {
 
@@ -8,11 +16,10 @@ export default class Results extends React.Component {
     const { cards, correct } = this.props.navigation.state.params;
 
     return (<View>
-      <Text>Results!</Text>
-      <Text>Cards: {cards}</Text>
-      <Text>Correct: {correct}</Text>
-      <Text>Incorrect: {cards - correct}</Text>
-      <Text>Percentage: {(correct/cards) * 100}%</Text>
+      <Text style={styles.results}>Cards: {cards}</Text>
+      <Text style={styles.results}>Correct: {correct}</Text>
+      <Text style={styles.results}>Incorrect: {cards - correct}</Text>
+      <Text style={styles.results}>Percentage: {(correct/cards) * 100}%</Text>
     </View>)
   }
 }
