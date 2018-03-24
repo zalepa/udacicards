@@ -3,7 +3,6 @@ import Deck from '../screens/Deck';
 import EditDeck from '../screens/EditDeck';
 import AddCard from '../screens/AddCard';
 import StartQuiz from '../screens/StartQuiz';
-import Results from '../screens/Results';
 import { StackNavigator } from 'react-navigation';
 import TabNavigation from './TabNavigation';
 
@@ -59,17 +58,6 @@ const MainNavigation = StackNavigator({
     screen: StartQuiz,
     navigationOptions: {
       title: 'Start Quiz',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: 'tomato',
-        height: 52
-      }
-    }
-  },
-  Results: {
-    screen: Results,
-    navigationOptions: {
-      title: 'Results',
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: 'tomato',

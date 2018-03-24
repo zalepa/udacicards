@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
+import {Alert, TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import theme from '../../theme';
 
@@ -45,17 +45,27 @@ class StartQuiz extends React.Component {
     });
   }
 
-  navigateToResults = () => {
-    this.props.navigation.navigate('Results', {
-      cards: this.props.cards.length,
-      correct: this.state.correctAnswers,
-    });
+  displayResults = () => {
+    const correct = this.state.correctAnswers;
+    const all = this.props.cards.length;
+    const pct = Math.round(100*(correct/all));
+
+    const msg = `You got ${correct} out of ${all} right (${pct}%)`
+
+    Alert.alert('Quiz Completed', msg, [
+      {
+        text: 'OK',
+        onPress: () => {
+          this.props.navigation.goBack();
+        }
+      }
+    ]);
   }
 
   moveQuestion = () => {
 
     if (this.state.currentCardNumber === this.props.cards.length - 1) {
-      this.navigateToResults();
+      this.displayResults();
       return;
     }
 
