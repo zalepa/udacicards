@@ -91,9 +91,11 @@ class Deck extends React.Component {
         <Text style={styles.buttonText}>Add Card</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.button, styles.altButton]}  onPress={this.startQuiz}>
-        <Text style={styles.buttonText}>Start Quiz</Text>
-      </TouchableOpacity>
+      {this.props.deck.cards.length > 0 &&
+        <TouchableOpacity style={[styles.button, styles.altButton]}  onPress={this.startQuiz}>
+          <Text style={styles.buttonText}>Start Quiz</Text>
+        </TouchableOpacity>
+      }
 
       <TouchableOpacity style={[styles.button]}  onPress={this.editDeck}>
         <Text style={styles.buttonText}>Edit Deck</Text>
