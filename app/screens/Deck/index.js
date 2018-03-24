@@ -3,6 +3,7 @@ import {Alert, TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import { addCard, deleteDeck} from '../../actions';
 import { NavigationActions } from 'react-navigation';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
   deck: {
@@ -20,20 +21,14 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     textAlign: 'center'
   },
+  hr: {
+    borderBottomColor: '#CFCFCF',
+    borderBottomWidth: 1,
+    marginTop: 5,
+    marginBottom: 5,
+  },
   button: {
-    backgroundColor: 'tomato',
-    margin: 10,
-    borderRadius: 10,
-    padding: 7,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 19,
-    padding: 7,
-    textAlign: 'center'
-  },
-  altButton: {
-    backgroundColor: '#FFBF47'
+    flex: 0.1
   }
 });
 
@@ -84,27 +79,33 @@ class Deck extends React.Component {
     if (!this.props.deck) {
       return <View><Text style={{textAlign: 'center', padding: 35}}>Deleting...</Text></View>
     }
-    return (<View style={styles.deck}>
-      <Text style={styles.header}>{this.props.deck.title}</Text>
-      <Text style={styles.size}>{this.props.deck.cards.length} cards</Text>
-      <TouchableOpacity style={[styles.button]} onPress={this.addCard}>
-        <Text style={styles.buttonText}>Add Card</Text>
-      </TouchableOpacity>
-
-      {this.props.deck.cards.length > 0 &&
-        <TouchableOpacity style={[styles.button, styles.altButton]}  onPress={this.startQuiz}>
-          <Text style={styles.buttonText}>Start Quiz</Text>
+    return (
+      <View style={styles.deck}>
+        <View style={{flex: 0.6}}>
+          <Text style={[styles.header]}>{this.props.deck.title}</Text>
+          <Text style={[{flex: 0.1}, styles.size]}>{this.props.deck.cards.length} cards</Text>
+        </View>
+        <TouchableOpacity style={[styles.button, theme.button]} onPress={this.addCard}>
+          <Text style={theme.buttonText}>Add Card</Text>
         </TouchableOpacity>
-      }
 
-      <TouchableOpacity style={[styles.button]}  onPress={this.editDeck}>
-        <Text style={styles.buttonText}>Edit Deck</Text>
-      </TouchableOpacity>
+        {this.props.deck.cards.length > 0 &&
+          <TouchableOpacity style={[styles.button, theme.button, theme.altButton]}  onPress={this.startQuiz}>
+            <Text style={theme.buttonText}>Start Quiz</Text>
+          </TouchableOpacity>
+        }
 
-      <TouchableOpacity style={[styles.button, { backgroundColor: '#8C1500'}]}  onPress={this.deleteDeck}>
-        <Text style={styles.buttonText}>DELETE DECK</Text>
-      </TouchableOpacity>
-    </View>)
+        <View style={styles.hr}/>
+
+        <TouchableOpacity style={[styles.button, theme.button]}  onPress={this.editDeck}>
+          <Text style={theme.buttonText}>Edit Deck</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.button, theme.button, theme.dangerButton]}  onPress={this.deleteDeck}>
+          <Text style={theme.buttonText}>Delete Deck</Text>
+        </TouchableOpacity>
+      </View>
+    )
   }
 }
 

@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 const BASE_COLOR = 'tomato';
 const BASE_BORDER_COLOR = 'gray';
 const WHITE = 'white';
+const ALT_COLOR = '#FFBF47';
+const DANGER_COLOR = '#8C1500';
 
 const theme = StyleSheet.create({
   button: {
@@ -25,6 +27,12 @@ const theme = StyleSheet.create({
     margin: 10,
     fontSize: 15
   },
+  altButton: {
+    backgroundColor: ALT_COLOR
+  },
+  dangerButton: {
+    backgroundColor: DANGER_COLOR
+  }
 });
 
 export default theme;
