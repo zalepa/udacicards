@@ -22,7 +22,7 @@ class Decks extends React.Component {
 
 function stateToProps(state) {
   return {
-    decks: state
+    decks: state.decks
   }
 }
 

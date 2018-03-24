@@ -1,8 +1,9 @@
 import { createStore } from 'react';
+import { combineReducers } from 'redux';
 
 import { CREATE_DECK, ADD_CARD } from '../actions';
 
-function reducer(state = [], action) {
+function deckReducer(state = [], action) {
   switch (action.type) {
     case CREATE_DECK:
       action.deck.key = state.length + 1;
@@ -20,4 +21,4 @@ function reducer(state = [], action) {
   }
 }
 
-export default reducer;
+export default combineReducers({ decks: deckReducer });
