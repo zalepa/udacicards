@@ -1,5 +1,6 @@
 import Decks from '../screens/Decks';
 import Deck from '../screens/Deck';
+import EditDeck from '../screens/EditDeck';
 import AddCard from '../screens/AddCard';
 import StartQuiz from '../screens/StartQuiz';
 import Results from '../screens/Results';
@@ -41,6 +42,19 @@ const MainNavigation = StackNavigator({
       }
     }
   },
+
+  EditDeck: {
+    screen: EditDeck,
+    navigationOptions: {
+      title: 'Edit Deck',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'tomato',
+        height: 52
+      }
+    }
+  },
+
   StartQuiz: {
     screen: StartQuiz,
     navigationOptions: {

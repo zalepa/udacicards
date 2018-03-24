@@ -50,6 +50,11 @@ class Deck extends React.Component {
   addCard = () => {
     this.props.navigation.navigate('AddCard', { deck: this.props.deck, addCard: this.props.persistCard });
   }
+
+  editDeck = () => {
+    this.props.navigation.navigate('EditDeck', { deck: this.props.deck });
+  }
+
   startQuiz = () => {
     this.props.navigation.navigate('StartQuiz', { deck: this.props.deck });
   }
@@ -85,8 +90,13 @@ class Deck extends React.Component {
       <TouchableOpacity style={[styles.button]} onPress={this.addCard}>
         <Text style={styles.buttonText}>Add Card</Text>
       </TouchableOpacity>
+
       <TouchableOpacity style={[styles.button, styles.altButton]}  onPress={this.startQuiz}>
         <Text style={styles.buttonText}>Start Quiz</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.button]}  onPress={this.editDeck}>
+        <Text style={styles.buttonText}>Edit Deck</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.button, { backgroundColor: '#8C1500'}]}  onPress={this.deleteDeck}>

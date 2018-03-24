@@ -1,7 +1,7 @@
 import { createStore } from 'react';
 import { combineReducers } from 'redux';
 
-import { CREATE_DECK, ADD_CARD, DELETE_DECK } from '../actions';
+import { CREATE_DECK, ADD_CARD, EDIT_DECK, DELETE_DECK } from '../actions';
 
 function deckReducer(state = [], action) {
   switch (action.type) {
@@ -11,6 +11,13 @@ function deckReducer(state = [], action) {
     case ADD_CARD:
       return state.map(deck => {
         if (deck.key === action.key) deck.cards.push(action.card)
+        return deck;
+      });
+    case EDIT_DECK:
+      return state.map(deck => {
+        if (deck.key === action.deck.key) {
+          deck.title = action.deck.title
+        }
         return deck;
       });
     case DELETE_DECK:
