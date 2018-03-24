@@ -1,8 +1,30 @@
 import React from 'react';
-import {Button, TextInput, Text, View} from 'react-native';
+import {TouchableOpacity, TextInput, Text, View, StyleSheet} from 'react-native';
 import { NavigationActions } from 'react-navigation';
-
 import { connect } from 'react-redux';
+
+const styles = StyleSheet.create({
+  formInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    margin: 10,
+    fontSize: 22
+  },
+  button: {
+    backgroundColor: 'tomato',
+    margin: 10,
+    borderRadius: 10,
+    padding: 7,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 19,
+    padding: 7,
+    textAlign: 'center'
+  },
+});
 
 class AddCard extends React.Component {
 
@@ -38,21 +60,24 @@ class AddCard extends React.Component {
   render() {
     console.log();
     return (<View>
-      <Text>Question</Text>
+
       <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        style={styles.formInput}
         onChangeText={this.handleQuestionChange}
         value={this.state.question}
+        placeholder="Question"
       />
 
-      <Text>Answer</Text>
       <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        style={styles.formInput}
         onChangeText={this.handleAnswerChange}
         value={this.state.answer}
+        placeholder="Answer"
       />
 
-      <Button title="Add Card" onPress={this.addCard} />
+      <TouchableOpacity style={styles.button} onPress={this.addCard}>
+        <Text style={styles.buttonText}>Add Card</Text>
+      </TouchableOpacity>
 
     </View>)
   }
