@@ -1,7 +1,40 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import { addCard } from '../../actions';
+
+const styles = StyleSheet.create({
+  deck: {
+    flex: 1
+  },
+  header: {
+    fontSize: 25,
+    paddingTop: 25,
+    paddingBottom: 10,
+    textAlign: 'center'
+  },
+  size: {
+    fontSize: 20,
+    paddingBottom: 20,
+    fontStyle: 'italic',
+    textAlign: 'center'
+  },
+  button: {
+    backgroundColor: 'tomato',
+    margin: 10,
+    borderRadius: 10,
+    padding: 7,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 19,
+    padding: 7,
+    textAlign: 'center'
+  },
+  altButton: {
+    backgroundColor: '#FFBF47'
+  }
+});
 
 class Deck extends React.Component {
 
@@ -22,11 +55,15 @@ class Deck extends React.Component {
 
 
   render() {
-    return (<View>
-      <Text>{this.props.deck.title}</Text>
-      <Text>{this.props.deck.cards.length} cards</Text>
-      <Button title="Add Card" onPress={this.addCard} />
-      <Button title="Start Quiz" onPress={this.startQuiz}/>
+    return (<View style={styles.deck}>
+      <Text style={styles.header}>{this.props.deck.title}</Text>
+      <Text style={styles.size}>{this.props.deck.cards.length} cards</Text>
+      <TouchableOpacity style={[styles.button]} onPress={this.addCard}>
+        <Text style={styles.buttonText}>Add Card</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, styles.altButton]}  onPress={this.startQuiz}>
+        <Text style={styles.buttonText}>Start Quiz</Text>
+      </TouchableOpacity>
     </View>)
   }
 }
