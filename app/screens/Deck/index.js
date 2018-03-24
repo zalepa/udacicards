@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
+import {Alert, TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import { addCard, deleteDeck} from '../../actions';
 import { NavigationActions } from 'react-navigation';
@@ -56,12 +56,22 @@ class Deck extends React.Component {
 
   deleteDeck = () => {
 
-    this.props.navigation.dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Home'})]
-    }));
+    Alert.alert(
+      'Confirm Delete',
+      'Are you sure you want to delete this deck?',
+      [
+        {text: 'No' },
+        {text: 'Yes', onPress: () => {
+          this.props.navigation.dispatch(NavigationActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'Home'})]
+          }));
 
-    this.props.deleteDeck(this.props.deck.key);
+          this.props.deleteDeck(this.props.deck.key);
+        }}
+      ]
+    )
+
   }
 
 
