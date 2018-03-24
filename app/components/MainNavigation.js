@@ -2,6 +2,7 @@ import Decks from '../screens/Decks';
 import Deck from '../screens/Deck';
 import AddCard from '../screens/AddCard';
 import StartQuiz from '../screens/StartQuiz';
+import Results from '../screens/Results';
 import { StackNavigator } from 'react-navigation';
 import TabNavigation from './TabNavigation';
 
@@ -26,6 +27,9 @@ const MainNavigation = StackNavigator({
     navigationOptions: {
       title: 'Start Quiz'
     }
+  },
+  Results: {
+    screen: Results
   }
 })
 
