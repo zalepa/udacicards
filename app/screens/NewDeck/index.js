@@ -1,7 +1,32 @@
 import React from 'react';
-import {Text, View, TextInput, Button} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import { createDeck } from '../../actions';
 import { connect } from 'react-redux';
+
+
+const styles = StyleSheet.create({
+  formInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 10,
+    margin: 10,
+    fontSize: 22
+  },
+  button: {
+    backgroundColor: 'tomato',
+    margin: 10,
+    borderRadius: 10,
+    padding: 7,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 19,
+    padding: 7,
+    textAlign: 'center'
+  },
+});
 
 class NewDeck extends React.Component {
 
@@ -29,18 +54,15 @@ class NewDeck extends React.Component {
 
   render() {
     return (<View>
-      <Text>What is the title of your new deck?</Text>
       <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        style={styles.formInput}
+        placeholder="Deck title"
         onChangeText={this.handleTitleChange}
         value={this.state.title}
       />
-      <Button
-        onPress={this.onCreateNewDeck}
-        title="Submit"
-        color="#841584"
-        accessibilityLabel="Create a new deck"
-      />
+      <TouchableOpacity style={styles.button} onPress={this.onCreateNewDeck} accessibilityLabel="Create a new deck">
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
     </View>)
   }
 }
