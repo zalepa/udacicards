@@ -2,29 +2,8 @@ import React from 'react';
 import {TouchableOpacity, TextInput, Text, View, StyleSheet} from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
-
-const styles = StyleSheet.create({
-  formInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    padding: 10,
-    margin: 10,
-    fontSize: 22
-  },
-  button: {
-    backgroundColor: 'tomato',
-    margin: 10,
-    borderRadius: 10,
-    padding: 7,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 19,
-    padding: 7,
-    textAlign: 'center'
-  },
-});
+import { addCard } from '../../actions';
+import styles from './styles';
 
 class AddCard extends React.Component {
 
@@ -46,9 +25,12 @@ class AddCard extends React.Component {
   }
 
   addCard = () => {
+    console.log(this.props);
     if (!this.state.question || !this.state.answer) return;
 
     this.props.addCard(this.props.deck.key, this.state);
+
+    console.log(this.props.deck);
 
     const setParamsAction = NavigationActions.setParams({
       params: {deck: this.props.deck},
@@ -56,12 +38,13 @@ class AddCard extends React.Component {
     });
 
     this.props.navigation.dispatch(setParamsAction);
-    this.props.navigation.goBack();
+    // this.props.navigation.goBack();
   }
 
   render() {
-    console.log();
     return (<View>
+
+      <Text>Current: {this.props.cards.length} cards</Text>
 
       <TextInput
         style={styles.formInput}
@@ -86,11 +69,21 @@ class AddCard extends React.Component {
 }
 
 function stateToProps(state, ownProps) {
-
+  const {deck, addCard} = ownProps.navigation.state.params
+  const activeDeck = state.decks.find(d => d.key === deck.key);
   return {
-    deck: ownProps.navigation.state.params.deck,
-    addCard: ownProps.navigation.state.params.addCard,
+    decks: state.decks,
+    deck: activeDeck,
+    cards: activeDeck.cards
   }
 }
 
-export default connect(stateToProps)(AddCard);
+function dispatchToProps(dispatch) {
+  return {
+    addCard: (key, card) => {
+      dispatch(addCard(key, card))
+    }
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(AddCard);

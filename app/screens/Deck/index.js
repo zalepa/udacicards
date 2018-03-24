@@ -89,6 +89,7 @@ class Deck extends React.Component {
 function stateToProps(state, ownProps) {
   const propDeck = ownProps.navigation.state.params.deck;
   return {
+    decks: state.decks,
     deck: state.decks.filter(d => {
       if (d.key === propDeck.key) return d;
     })[0]

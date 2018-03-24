@@ -9,8 +9,7 @@ function deckReducer(state = [], action) {
       action.deck.key = state.length + 1;
       return [...state, action.deck];
     case ADD_CARD:
-      let newState = state.slice(0);
-      return newState.map(deck => {
+      return state.map(deck => {
         if (deck.key === action.key) deck.cards.push(action.card)
         return deck;
       });
