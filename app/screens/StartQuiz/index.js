@@ -70,12 +70,19 @@ class StartQuiz extends React.Component {
   }
 
   render() {
+
+    const { currentCardNumber, correctAnswers } = this.state;
+    const {cards} = this.props.deck
+
     return (<View>
-      <Text style={styles.status}>{this.state.currentCardNumber} / {this.props.cards.length} ({(this.state.correctAnswers / this.props.cards.length) * 100}% correct)</Text>
+      <Text style={styles.status}>
+        {currentCardNumber} / {cards.length}
+        ({Math.round((correctAnswers / cards.length) * 100)}% correct)
+      </Text>
       <Text style={styles.content}>
         {this.state.viewState === 'question'
-          ? this.props.cards[this.state.currentCardNumber].question
-          : this.props.cards[this.state.currentCardNumber].answer
+          ? cards[currentCardNumber].question
+          : cards[currentCardNumber].answer
         }
       </Text>
 

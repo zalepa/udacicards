@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     margin: 10,
-    fontSize: 22
+    fontSize: 15
   },
   button: {
     backgroundColor: 'tomato',

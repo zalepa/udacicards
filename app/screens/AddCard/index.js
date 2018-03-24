@@ -61,7 +61,11 @@ class AddCard extends React.Component {
     Alert.alert('Card Added', 'Successfully added a new card!', [
       {
         text: 'Keep Adding',
-        onPress: () => {}
+        onPress: () => {
+          this.setState({
+            question: '', answer: ''
+          })
+        }
       }, {
         text: 'I\'m Done',
         onPress: () => {

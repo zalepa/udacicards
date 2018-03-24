@@ -19,7 +19,7 @@ export default class Results extends React.Component {
       <Text style={styles.results}>Cards: {cards}</Text>
       <Text style={styles.results}>Correct: {correct}</Text>
       <Text style={styles.results}>Incorrect: {cards - correct}</Text>
-      <Text style={styles.results}>Percentage: {(correct/cards) * 100}%</Text>
+      <Text style={styles.results}>Percentage: {Math.round((correct/cards) * 100)}%</Text>
     </View>)
   }
 }
