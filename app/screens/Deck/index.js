@@ -1,15 +1,18 @@
 import React from 'react';
 import {Button, Text, View} from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import { addCard } from '../../actions';
 
 class Deck extends React.Component {
 
   addCard = () => {
-    this.props.navigation.navigate('AddCard', { deck: this.props.deck });
+    this.props.navigation.navigate('AddCard', { deck: this.props.deck, addCard: this.props.persistCard });
   }
   startQuiz = () => {
     this.props.navigation.navigate('StartQuiz', { deck: this.props.deck });
   }
+
 
   render() {
     return (<View>
@@ -22,9 +25,20 @@ class Deck extends React.Component {
 }
 
 function stateToProps(state, ownProps) {
+  const propDeck = ownProps.navigation.state.params.deck;
   return {
-    deck: ownProps.navigation.state.params.deck
+    deck: state.decks.filter(d => {
+      if (d.key === propDeck.key) return d;
+    })[0]
   }
 }
 
-export default connect(stateToProps)(Deck);
+function dispatchToProps(dispatch) {
+  return {
+    persistCard: (key, card) => {
+      dispatch(addCard(key, card));
+    }
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Deck);

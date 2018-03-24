@@ -1,7 +1,8 @@
 import React from 'react';
 import {Button, TextInput, Text, View} from 'react-native';
+import { NavigationActions } from 'react-navigation';
+
 import { connect } from 'react-redux';
-import { addCard } from '../../actions';
 
 class AddCard extends React.Component {
 
@@ -23,11 +24,19 @@ class AddCard extends React.Component {
   }
 
   addCard = () => {
-    this.props.dispatch(addCard(this.props.deck.key, this.state));
+    this.props.addCard(this.props.deck.key, this.state);
+
+    const setParamsAction = NavigationActions.setParams({
+      params: {deck: this.props.deck},
+      key: 'Deck'
+    });
+
+    this.props.navigation.dispatch(setParamsAction);
     this.props.navigation.goBack();
   }
 
   render() {
+    console.log();
     return (<View>
       <Text>Question</Text>
       <TextInput
@@ -50,8 +59,10 @@ class AddCard extends React.Component {
 }
 
 function stateToProps(state, ownProps) {
+
   return {
-    deck: ownProps.navigation.state.params.deck
+    deck: ownProps.navigation.state.params.deck,
+    addCard: ownProps.navigation.state.params.addCard,
   }
 }
 
