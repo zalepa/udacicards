@@ -9,14 +9,27 @@ const TabNavigation = TabNavigator({
     screen: Decks,
     navigationOptions: {
       title: 'Decks',
-      tabBarIcon: () => <Ionicons name='ios-list-outline' size={30}/>
+      tabBarIcon: ({tintColor}) => <Ionicons name='ios-list-outline' size={30} color={tintColor}/>
     }
   },
   New: {
     screen: NewDeck,
     navigationOptions: {
-      tabBarIcon: () => <Ionicons name='ios-add' size={30}/>
+      tabBarIcon: ({tintColor}) => <Ionicons name='ios-add' color={tintColor} size={30}/>
     }
+  }
+}, {
+  tabBarOptions: {
+    activeTintColor: '#fff',
+    inactiveTintColor: '#B21B00',
+    style: {
+      backgroundColor: 'tomato',
+      height: 60,
+      paddingBottom: 5
+    },
+    labelStyle: {
+      fontSize: 12,
+    },
   }
 })
 
