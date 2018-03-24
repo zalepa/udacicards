@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import {Alert, Text, View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import { createDeck } from '../../actions';
 import { connect } from 'react-redux';
 
@@ -44,7 +44,13 @@ class NewDeck extends React.Component {
 
   onCreateNewDeck = () => {
 
-  if (!this.state.title) return;
+  if (!this.state.title) {
+    Alert.alert(
+      'Error',
+      'A title is required'
+    );
+    return;
+  }
 
     const deck = {
       title: this.state.title,
