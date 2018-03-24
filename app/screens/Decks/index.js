@@ -5,24 +5,28 @@ import PreviewCard from '../../components/PreviewCard'
 import { connect } from 'react-redux';
 
 class Decks extends React.Component {
-
-  onSelectPreviewCard = (deck) => {
-    this.props.navigation.navigate('Deck', { deck });
+  renderCard = ({item}) => {
+    return <PreviewCard deck={item} onPress={this.props.gotoDeck} />
   }
 
   render() {
-    return (<View style={styles.container}>
-
-      {this.props.decks.length > 0
-        ? (<FlatList data={this.props.decks} renderItem={({item}) => <PreviewCard deck={item} onPress={this.onSelectPreviewCard} />} />)
-        : (<Text style={{fontSize: 35, padding: 10, marginTop: 20, textAlign: 'center', color: '#cfcfcf'}}>No decks yet!</Text>)}
-    </View>)
+    const {decks} = this.props;
+    return (
+      <View style={styles.container}>
+        {decks.length > 0
+          ? (<FlatList data={decks} renderItem={this.renderCard} />)
+          : (<Text style={styles.noDecks}>No decks yet!</Text>)}
+      </View>
+    )
   }
 }
 
-function stateToProps(state) {
+function stateToProps(state, ownProps) {
   return {
-    decks: state.decks
+    decks: state.decks,
+    gotoDeck: (deck) => {
+      ownProps.navigation.navigate('Deck', { deck });
+    }
   }
 }
 

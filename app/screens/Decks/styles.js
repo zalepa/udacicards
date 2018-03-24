@@ -13,6 +13,13 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderBottomWidth: 4,
     borderBottomColor: '#f0f0f0'
+  },
+  noDecks: {
+    fontSize: 35,
+    padding: 10,
+    marginTop: 20,
+    textAlign: 'center',
+    color: '#cfcfcf'
   }
 });
 
