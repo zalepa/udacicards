@@ -43,10 +43,15 @@ class NewDeck extends React.Component {
   }
 
   onCreateNewDeck = () => {
+
+  if (!this.state.title) return;
+
     const deck = {
       title: this.state.title,
       cards: []
     }
+
+
     this.props.dispatch(createDeck(deck));
     this.setState({ title: '' });
     this.props.navigation.navigate('Home');

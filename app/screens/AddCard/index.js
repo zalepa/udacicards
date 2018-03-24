@@ -46,6 +46,8 @@ class AddCard extends React.Component {
   }
 
   addCard = () => {
+    if (!this.state.question || !this.state.answer) return;
+
     this.props.addCard(this.props.deck.key, this.state);
 
     const setParamsAction = NavigationActions.setParams({
