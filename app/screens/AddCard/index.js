@@ -24,7 +24,7 @@ class AddCard extends React.Component {
 
   addCard = () => {
     this.props.dispatch(addCard(this.props.deck.key, this.state));
-    this.props.navigation.navigate('Deck', { deck: this.props.deck })
+    this.props.navigation.goBack();
   }
 
   render() {
