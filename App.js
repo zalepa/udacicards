@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger'
 import { persistStore, persistReducer } from 'redux-persist'
@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import reducer from './app/reducers';
 import Decks from './app/screens/Decks';
 import MainNavigation from './app/components/MainNavigation';
+import { Constants } from 'expo';
 
 console.ignoredYellowBox = ['Remote debugger'];
 
@@ -27,7 +28,12 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <View style={{flex: 1, justifyContent: "center", paddingTop: 20}}>
+          <View style={{flex: 1, justifyContent: "center"}}>
+            <StatusBar
+               backgroundColor="tomato"
+               barStyle="light-content"
+               style={{height: Constants.statusBarHeight}}
+             />
             <MainNavigation />
           </View>
         </PersistGate>
