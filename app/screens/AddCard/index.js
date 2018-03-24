@@ -1,62 +1,45 @@
 import React from 'react';
-import {
-  Alert,
-  TouchableOpacity,
-  TextInput,
-  Text,
-  View,
-  StyleSheet
-} from 'react-native';
+import { Alert, TouchableOpacity, TextInput, Text, View, StyleSheet} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import {connect} from 'react-redux';
 import {addCard} from '../../actions';
-import styles from './styles';
+import theme from '../../theme.js';
 
 class AddCard extends React.Component {
-
+  // Managed state
   state = {
     question: '',
     answer: ''
   }
 
-  handleQuestionChange = (question) => {
-    this.setState(oldState => {
-      return {
-        ...oldState,
-        question
-      }
-    })
+  handleTextfieldChange = (stateComponent) => {
+    return (component) => {
+      this.setState(oldState => {
+        return {
+          ...oldState,
+          [stateComponent]: component
+        }
+      })
+    }
   }
 
-  handleAnswerChange = (answer) => {
-    this.setState(oldState => {
-      return {
-        ...oldState,
-        answer
-      }
-    })
+  validate = ({question, answer}) => {
+    if (question && answer) return;
+    if (!question && !answer) return 'Question and answer are both required';
+    else if (!question) return 'Question is required'
+    else return 'Answer is required'
   }
 
   addCard = () => {
+    let msg = this.validate(this.state);
 
-    const q = this.state.question;
-    const a = this.state.answer;
-
-    if (!q || !a) {
-      let msg = ''
-      if (!q && !a)
-        msg = 'Question and answer are both required';
-      else if (!q)
-        msg = 'Question is required'
-      else
-        msg = 'Answer is required'
-
-      Alert.alert('Error', msg);
-
-      return;
+    if (msg) {
+      return Alert.alert('Error', msg);
     }
 
-    this.props.addCard(this.props.deck.key, this.state);
+    const {key} = this.props.deck;
+
+    this.props.addCard(key, this.state);
 
     Alert.alert('Card Added', 'Successfully added a new card!', [
       {
@@ -76,13 +59,20 @@ class AddCard extends React.Component {
   }
 
   render() {
-    return (<View>
-      <TextInput style={styles.formInput} onChangeText={this.handleQuestionChange} value={this.state.question} placeholder="Question"/>
+    return (
+      <View>
+      <TextInput style={theme.textfield}
+                 onChangeText={this.handleTextfieldChange('question')}
+                 value={this.state.question}
+                 placeholder="Question"/>
 
-      <TextInput style={styles.formInput} onChangeText={this.handleAnswerChange} value={this.state.answer} placeholder="Answer"/>
+      <TextInput style={theme.textfield}
+                 onChangeText={this.handleTextfieldChange('answer')}
+                 value={this.state.answer}
+                 placeholder="Answer"/>
 
-      <TouchableOpacity style={styles.button} onPress={this.addCard}>
-        <Text style={styles.buttonText}>Add Card</Text>
+      <TouchableOpacity style={theme.button} onPress={this.addCard}>
+        <Text style={theme.buttonText}>Add Card</Text>
       </TouchableOpacity>
 
     </View>)
