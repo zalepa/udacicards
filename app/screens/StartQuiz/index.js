@@ -1,10 +1,13 @@
 import React from 'react';
 import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
   status: {
-    fontSize: 15
+    fontSize: 15,
+    textAlign: 'center',
+    margin: 5,
   },
   content: {
     fontSize: 30,
@@ -12,21 +15,9 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 30,
   },
-  button: {
-    backgroundColor: 'tomato',
-    margin: 5,
-    borderRadius: 10,
-    padding: 5,
-  },
   buttonCorrect: {
     backgroundColor: '#6DFF83'
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 19,
-    padding: 7,
-    textAlign: 'center'
-  }
 })
 
 class StartQuiz extends React.Component {
@@ -34,7 +25,8 @@ class StartQuiz extends React.Component {
   state = {
     currentCardNumber: 0,
     viewState: 'question',
-    correctAnswers: 0
+    correctAnswers: 0,
+    quizOver: false
   }
 
   toggleViewState = () => {
@@ -44,29 +36,34 @@ class StartQuiz extends React.Component {
   }
 
   onCorrectAnswer = () => {
-    this.setState(oldState => {
+    this.setState((oldState) => {
       return {
-        correctAnswers: oldState.correctAnswers + 1,
+        correctAnswers: oldState.correctAnswers + 1
       }
+    }, () => {
+      this.moveQuestion();
     });
+  }
 
-    this.moveQuestion();
+  navigateToResults = () => {
+    this.props.navigation.navigate('Results', {
+      cards: this.props.cards.length,
+      correct: this.state.correctAnswers,
+    });
   }
 
   moveQuestion = () => {
+
     if (this.state.currentCardNumber === this.props.cards.length - 1) {
-      this.props.navigation.navigate('Results', {
-        cards: this.props.cards.length,
-        correct: this.state.correctAnswers,
-      });
-    } else {
-      this.setState(oldState => {
-        return {
-          viewState: 'question',
-          currentCardNumber: oldState.currentCardNumber + 1,
-        }
-      });
+      this.navigateToResults();
+      return;
     }
+
+    this.setState((oldState) => {
+      return {
+        currentCardNumber: oldState.currentCardNumber + 1
+      }
+    })
   }
 
   render() {
@@ -76,9 +73,10 @@ class StartQuiz extends React.Component {
 
     return (<View>
       <Text style={styles.status}>
-        {currentCardNumber} / {cards.length}
-        ({Math.round((correctAnswers / cards.length) * 100)}% correct)
+        <Text>{currentCardNumber} / {cards.length}</Text>
+        <Text> ({Math.round((correctAnswers / cards.length) * 100)}% correct)</Text>
       </Text>
+
       <Text style={styles.content}>
         {this.state.viewState === 'question'
           ? cards[currentCardNumber].question
@@ -86,16 +84,16 @@ class StartQuiz extends React.Component {
         }
       </Text>
 
-      <TouchableOpacity style={[styles.button, {backgroundColor: '#FAFAFA'}]} onPress={this.toggleViewState}>
-        <Text style={[styles.buttonText, { color: 'darkgray'}]}>{this.state.viewState === 'question' ? 'View Answer' : 'View Question'}</Text>
+      <TouchableOpacity style={[theme.button, {backgroundColor: '#FAFAFA'}]} onPress={this.toggleViewState}>
+        <Text style={[theme.buttonText, { color: 'darkgray'}]}>{this.state.viewState === 'question' ? 'View Answer' : 'View Question'}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.button,  styles.buttonCorrect]}  onPress={this.onCorrectAnswer}>
-        <Text style={styles.buttonText}>Correct</Text>
+      <TouchableOpacity style={[theme.button,  styles.buttonCorrect]}  onPress={this.onCorrectAnswer}>
+        <Text style={theme.buttonText}>Correct</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.button]}  onPress={this.moveQuestion}>
-        <Text style={styles.buttonText}>Incorrect</Text>
+      <TouchableOpacity style={[theme.button]}  onPress={this.moveQuestion}>
+        <Text style={theme.buttonText}>Incorrect</Text>
       </TouchableOpacity>
 
     </View>)
