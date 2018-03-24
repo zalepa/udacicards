@@ -1,7 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
-import { addCard } from '../../actions';
+import { addCard, deleteDeck} from '../../actions';
+import { NavigationActions } from 'react-navigation';
 
 const styles = StyleSheet.create({
   deck: {
@@ -53,8 +54,21 @@ class Deck extends React.Component {
     this.props.navigation.navigate('StartQuiz', { deck: this.props.deck });
   }
 
+  deleteDeck = () => {
+
+    this.props.navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Home'})]
+    }));
+
+    this.props.deleteDeck(this.props.deck.key);
+  }
+
 
   render() {
+    if (!this.props.deck) {
+      return <View><Text style={{textAlign: 'center', padding: 35}}>Deleting...</Text></View>
+    }
     return (<View style={styles.deck}>
       <Text style={styles.header}>{this.props.deck.title}</Text>
       <Text style={styles.size}>{this.props.deck.cards.length} cards</Text>
@@ -63,6 +77,10 @@ class Deck extends React.Component {
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, styles.altButton]}  onPress={this.startQuiz}>
         <Text style={styles.buttonText}>Start Quiz</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.button, { backgroundColor: '#8C1500'}]}  onPress={this.deleteDeck}>
+        <Text style={styles.buttonText}>DELETE DECK</Text>
       </TouchableOpacity>
     </View>)
   }
@@ -81,7 +99,10 @@ function dispatchToProps(dispatch) {
   return {
     persistCard: (key, card) => {
       dispatch(addCard(key, card));
-    }
+    },
+    deleteDeck: (key) => {
+      dispatch(deleteDeck(key));
+    },
   }
 }
 
