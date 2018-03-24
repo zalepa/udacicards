@@ -5,6 +5,14 @@ import { addCard } from '../../actions';
 
 class Deck extends React.Component {
 
+  static navigationOptions = ({navigation}) => {
+    const { params } = navigation.state;
+
+    return {
+      title: params ? params.deck.title : '',
+    }
+  }
+
   addCard = () => {
     this.props.navigation.navigate('AddCard', { deck: this.props.deck, addCard: this.props.persistCard });
   }

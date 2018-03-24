@@ -10,26 +10,58 @@ const MainNavigation = StackNavigator({
   Home: {
     screen: TabNavigation,
     navigationOptions: {
-      title: 'Decks'
+      title: 'My Decks',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'tomato',
+        height: 52
+      }
     }
   },
+
   Deck: {
     screen: Deck,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'tomato',
+        height: 52
+      }
+    }
   },
+
   AddCard: {
     screen: AddCard,
     navigationOptions: {
-      title: 'Add Card'
+      title: 'Add Card',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'tomato',
+        height: 52
+      }
     }
   },
   StartQuiz: {
     screen: StartQuiz,
     navigationOptions: {
-      title: 'Start Quiz'
+      title: 'Start Quiz',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'tomato',
+        height: 52
+      }
     }
   },
   Results: {
-    screen: Results
+    screen: Results,
+    navigationOptions: {
+      title: 'Results',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'tomato',
+        height: 52
+      }
+    }
   }
 })
 
