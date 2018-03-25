@@ -10,8 +10,9 @@ import reducer from './app/reducers';
 import Decks from './app/screens/Decks';
 import MainNavigation from './app/components/MainNavigation';
 import { Constants } from 'expo';
+import { setLocalNotification } from './app/utils/notification';
 
-console.ignoredYellowBox = ['Remote debugger'];
+// console.ignoredYellowBox = ['Remote debugger'];
 
 const persistConfig = {
   key: 'udacimeals:root',
@@ -24,6 +25,9 @@ const store = createStore(persistedReducer, applyMiddleware(logger));
 const persistor = persistStore(store)
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={store}>

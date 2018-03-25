@@ -2,7 +2,7 @@ import React from 'react';
 import {Alert, TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import theme from '../../theme';
-
+import { clearLocalNotifications, setLocalNotification } from '../../utils/notification';
 const styles = StyleSheet.create({
   status: {
     fontSize: 15,
@@ -49,6 +49,9 @@ class StartQuiz extends React.Component {
     const correct = this.state.correctAnswers;
     const all = this.props.cards.length;
     const pct = Math.round(100*(correct/all));
+
+    clearLocalNotifications()
+      .then(setLocalNotification);
 
     const msg = `You got ${correct} out of ${all} right (${pct}%)`
 
